@@ -1,0 +1,22 @@
+<html>
+<head>
+<title> my app</title>
+</head>
+<body>
+<form method="POST" action="{% url 'submit_quiz' %}">
+  {% csrf_token %}
+  {% for question in questions %}
+  <h3>{{ question.question_text }}</h3>
+  <ul>
+    <li><input type="radio" name="{{ question.id }}" value="{{ question.option1 }}"> {{ question.option1 }}</li>
+    <li><input type="radio" name="{{ question.id }}" value="{{ question.option2 }}"> {{ question.option2 }}</li>
+    <li><input type="radio" name="{{ question.id }}" value="{{ question.option3 }}"> {{ question.option3 }}</li>
+    <[Continued]
+
+    <li><input type="radio" name="{{ question.id }}" value="{{ question.option4 }}"> {{ question.option4 }}</li>
+  </ul>
+  {% endfor %}
+  <button type="submit">Submit</button>
+</form>
+</body>
+</html>

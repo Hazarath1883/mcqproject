@@ -1,0 +1,135 @@
+<!--<html>
+<head>
+<title>results</title>
+<style>
+    body {
+    font-family: Arial, sans-serif;
+    background-color: #f1f1f1;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    max-width: 600px;
+    padding: 40px;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+h1 {
+    color: #333333;
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+p {
+    color: #666666;
+    font-size: 18px;
+    margin-bottom: 40px;
+}
+
+</style>
+</head>
+<body>
+    <div class="container">
+        <h1>Test Completed!</h1>
+        <h2>Your Quiz Results</h2>
+        <p>Your score: {{ score }}</p>
+        <p>Thank you for taking the test.</p>
+    </div>
+</body>
+</html>-->
+<!DOCTYPE html>
+<html>
+<head>
+<title>Result Analysis</title>
+<link rel="icon" href="https://media.licdn.com/dms/image/C4E0BAQHFFsUyxCrhDg/company-logo_200_200/0/1611388525688?e=2147483647&v=beta&t=RP7UUHCVEihDo0c3sBhuBplsTti0PcmyDd5N_VaPrT0" >
+
+<style>
+  body {
+  background-image:url('https://images.unsplash.com/photo-1606326608606-aa0b62935f2b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80');
+  background-size: cover;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+#resultContainer {
+  max-width: 800px;
+  padding: 20px;
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  text-align: center;
+}
+
+h2 {
+  margin-top: 0;
+  font-size: 24px;
+  color: #333;
+}
+
+p {
+  font-size: 18px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.score {
+  font-weight: bold;
+  font-size: 32px;
+  color: #4CAF50;
+  margin-bottom: 20px;
+}
+
+.score-info {
+  font-size: 16px;
+  color: #333;
+}
+
+.back-button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.back-button:hover {
+  background-color: #45a049;
+}
+
+</style>
+</head>
+<body>
+<div id="resultContainer">
+  <h2>Result Analysis</h2>
+  <p class="score">Your Score: {{ score_1 }}%</p>
+  <p class="score-info">You have answered {{ score }} out of 5 questions correctly.</p>
+  <p class="score-info">Total incorrect questions:{{ score_2 }}</p>
+
+  <br>
+  <button class="back-button" onclick="goHome()">Go Back to Home</button>
+</div>
+<script>
+    function goHome() {
+      window.location.href = "/";
+    }
+  </script>
+
+</body>
+</html>
+

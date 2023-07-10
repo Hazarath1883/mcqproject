@@ -1,0 +1,367 @@
+<!--<html>
+<head>
+<title> my app</title>
+<style>
+  body{
+    background-color: cadetblue;
+  }
+</style>
+</head>
+<body>
+<form method="POST" action="{% url 'submit_quiz' %}">
+  {% csrf_token %}
+  {% for question in questions %}
+  <h3>{{ question.question_text }}</h3>
+  <ul>
+    <li><input type="radio" name="{{ question.id }}" value="{{ question.option1 }}"> {{ question.option1 }}</li>
+    <li><input type="radio" name="{{ question.id }}" value="{{ question.option2 }}"> {{ question.option2 }}</li>
+    <li><input type="radio" name="{{ question.id }}" value="{{ question.option3 }}"> {{ question.option3 }}</li>
+
+    <li><input type="radio" name="{{ question.id }}" value="{{ question.option4 }}"> {{ question.option4 }}</li>
+  </ul>
+  {% endfor %}
+  <button type="submit">Submit</button>
+</form>
+</body>
+</html> -->
+<!--<!DOCTYPE html>
+<html>
+<head>
+<title>My Quiz App</title>
+<style>
+  body {
+    background-color: cadetblue;
+  }
+</style>
+</head>
+<body>
+<form id="quizForm" method="POST" action="{% url 'submit_quiz' %}">
+  {% csrf_token %}
+  <div id="questionContainer">
+    {% for question in questions %}
+      <div class="question" data-correct-option="{{ question.correct_answer }}">
+        <h3>{{ question.question_text }}</h3>
+        <ul>
+          <li><input type="radio" name="{{ question.id }}" value="{{ question.option1 }}"> {{ question.option1 }}</li>
+          <li><input type="radio" name="{{ question.id }}" value="{{ question.option2 }}"> {{ question.option2 }}</li>
+          <li><input type="radio" name="{{ question.id }}" value="{{ question.option3 }}"> {{ question.option3 }}</li>
+          <li><input type="radio" name="{{ question.id }}" value="{{ question.option4 }}"> {{ question.option4 }}</li>
+        </ul>
+        <p class="correct-answer" style="display: none;"></p>
+      </div>
+    {% endfor %}
+    <button type="submit">Submit</button>
+  </div>
+</form>
+
+<script>
+  const questions = Array.from(document.querySelectorAll('.question'));
+  const form = document.getElementById('quizForm');
+
+  form.addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent default form submission
+    // You can add your own logic here to submit the form via AJAX if needed
+  });
+
+  questions.forEach(function(question) {
+    const options = Array.from(question.querySelectorAll('input[type="radio"]'));
+    const correctAnswer = question.querySelector('.correct-answer');
+
+    options.forEach(function(option) {
+      option.addEventListener('change', function() {
+        options.forEach(function(opt) {
+          opt.parentNode.style.color = ''; // Reset color for all options
+        });
+
+        if (this.checked) {
+          if (this.value === question.dataset.correctOption) {
+            correctAnswer.textContent = 'Correct answer: ' + this.value;
+            this.parentNode.style.color = 'green';
+          } else {
+            correctAnswer.textContent = 'Wrong answer. Correct answer: ' + question.dataset.correctOption;
+            this.parentNode.style.color = 'red'; // Mark incorrect option as red
+          }
+          correctAnswer.style.display = 'block';
+        } else {
+          correctAnswer.style.display = 'none';
+        }
+      });
+    });
+  });
+</script>
+
+
+</body>
+</html>-->
+<!--<!DOCTYPE html>
+<html>
+<head>
+<title>My Quiz App</title>
+<style>
+  body {
+    background-color: #f0f8ff;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  #questionContainer {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+  }
+  
+  h3 {
+    margin-top: 0;
+    font-size: 20px;
+    color: #333;
+  }
+  
+  ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 10px 0;
+  }
+  
+  li {
+    margin: 5px 0;
+  }
+  
+  label {
+    display: inline-block;
+    margin-left: 5px;
+    font-size: 16px;
+    color: #333;
+  }
+  
+  .correct-answer {
+    font-weight: bold;
+    margin-top: 10px;
+    color: #4CAF50;
+  }
+  
+  button[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  button[type="submit"]:hover {
+    background-color: #45a049;
+  }
+  
+  .question {
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin-bottom: 20px;
+    background-color: #f5f5f5;
+  }
+  
+  .question:hover {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+</style>
+</head>
+<body>
+<form id="quizForm" method="POST" action="{% url 'submit_quiz' %}">
+  {% csrf_token %}
+  <div id="questionContainer">
+    {% for question in questions %}
+      <div class="question" data-correct-option="{{ question.correct_answer }}">
+        <h3>Question {{ forloop.counter }}: {{ question.question_text }}</h3>
+        <ul>
+          <li><input type="radio" name="{{ question.id }}" value="{{ question.option1 }}" required> {{ question.option1 }}</li>
+          <li><input type="radio" name="{{ question.id }}" value="{{ question.option2 }}" required> {{ question.option2 }}</li>
+          <li><input type="radio" name="{{ question.id }}" value="{{ question.option3 }}" required> {{ question.option3 }}</li>
+          <li><input type="radio" name="{{ question.id }}" value="{{ question.option4 }}" required> {{ question.option4 }}</li>
+        </ul>
+        <p class="correct-answer" style="display: none;"></p>
+      </div>
+    {% endfor %}
+    <button type="submit">Submit</button>
+  </div>
+</form>
+
+<script>
+  const questions = Array.from(document.querySelectorAll('.question'));
+
+  questions.forEach(function(question) {
+    const options = Array.from(question.querySelectorAll('input[type="radio"]'));
+    const correctAnswer = question.querySelector('.correct-answer');
+
+    options.forEach(function(option) {
+      option.addEventListener('change', function() {
+        options.forEach(function(opt) {
+          opt.parentNode.style.color = ''; // Reset color for all options
+        });
+
+        if (this.checked) {
+          if (this.value === question.dataset.correctOption) {
+            correctAnswer.textContent = 'Correct answer: ' + this.value;
+            this.parentNode.style.color = 'green';
+          } else {
+            correctAnswer.textContent = 'Wrong answer. Correct answer is ' + question.dataset.correctOption;
+            this.parentNode.style.color = 'red'; // Mark incorrect option as red
+          }
+          correctAnswer.style.display = 'block';
+        } else {
+          correctAnswer.style.display = 'none';
+        }
+      });
+    });
+  });
+</script>
+
+</body>
+</html>-->
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="icon" href="https://media.licdn.com/dms/image/C4E0BAQHFFsUyxCrhDg/company-logo_200_200/0/1611388525688?e=2147483647&v=beta&t=RP7UUHCVEihDo0c3sBhuBplsTti0PcmyDd5N_VaPrT0" >
+
+<title>My Quiz App</title>
+<style>
+  body {
+    background-color: #f0f8ff;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  #questionContainer {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+  }
+  h1 {
+    text-align: center;
+    font-size: 24px;
+    color: #333;
+    margin: 20px 0;
+  }
+  h3 {
+    margin-top: 0;
+    font-size: 20px;
+    color: #333;
+  }
+  
+  ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 10px 0;
+  }
+  
+  li {
+    margin: 5px 0;
+  }
+  
+  label {
+    display: inline-block;
+    margin-left: 5px;
+    font-size: 16px;
+    color: #333;
+  }
+  
+  .correct-answer {
+    font-weight: bold;
+    margin-top: 10px;
+    color: #4CAF50;
+  }
+  
+  button[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  button[type="submit"]:hover {
+    background-color: #45a049;
+  }
+  
+  .question {
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin-bottom: 20px;
+    background-color: #f5f5f5;
+  }
+  
+  .question:hover {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+</style>
+</head>
+<body>
+  <h1>Online-Examination</h1>
+<form id="quizForm" method="POST" action="{% url 'submit_quiz' %}">
+  {% csrf_token %}
+  <div id="questionContainer">
+    {% for question in questions %}
+  <div class="question" data-correct-option="{{ question.correct_answer }}">
+    <h3>Question {{ forloop.counter }}: {{ question.question_text }}</h3>
+    <ul>
+      <li><input type="radio" name="{{ question.id }}" value="{{ question.option1 }}" required> {{ question.option1 }}</li>
+      <li><input type="radio" name="{{ question.id }}" value="{{ question.option2 }}" required> {{ question.option2 }}</li>
+      <li><input type="radio" name="{{ question.id }}" value="{{ question.option3 }}" required> {{ question.option3 }}</li>
+      <li><input type="radio" name="{{ question.id }}" value="{{ question.option4 }}" required> {{ question.option4 }}</li>
+    </ul>
+    <p class="correct-answer" style="display: none;"></p>
+  </div>
+{% endfor %}
+
+    <button type="submit">Submit</button>
+  </div>
+</form>
+
+<script>
+  const questions = Array.from(document.querySelectorAll('.question'));
+
+  
+  questions.forEach(function(question) {
+    const options = Array.from(question.querySelectorAll('input[type="radio"]'));
+    const correctAnswer = question.querySelector('.correct-answer');
+
+    options.forEach(function(option) {
+      option.addEventListener('change', function() {
+        options.forEach(function(opt) {
+          
+          opt.parentNode.style.color = ''; 
+          // Reset color for all options
+        });
+
+        if (this.checked) {
+          if (this.value === question.dataset.correctOption) {
+            correctAnswer.textContent = 'Correct answer: ' + this.value;
+            this.parentNode.style.color = 'green';
+          } else {
+            correctAnswer.textContent = 'Wrong answer. Correct answer is ' + question.dataset.correctOption;
+            this.parentNode.style.color = 'red'; // Mark incorrect option as red
+          }
+          correctAnswer.style.display = 'block';
+        } else {
+          correctAnswer.style.display = 'none';
+        }
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
+
+
